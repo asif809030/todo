@@ -24,6 +24,7 @@ const MyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setAllData([...allData, formData]);
+    setFormData({ todo: "" });
   };
 
   localStorage.setItem(Todo, JSON.stringify(allData));
