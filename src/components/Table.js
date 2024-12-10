@@ -10,8 +10,10 @@ const MyTable = ({ data, setAllData }) => {
   };
 
   const deleteTodo = (myIndex) => {
-    const updatedData = data.filter((_, index) => index !== myIndex);
-    setAllData(updatedData);
+    if (window.confirm("Are you sure want to delete this item?")) {
+      const updatedData = data.filter((_, index) => index !== myIndex);
+      setAllData(updatedData);
+    }
   };
   return (
     <div className="mt-4">
@@ -27,14 +29,19 @@ const MyTable = ({ data, setAllData }) => {
             data?.map((data, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td className="col-8">
-                  <span
-                    style={{
-                      textDecoration: data.completed ? "line-through" : "none",
-                    }}
-                  >
-                    {data.todo}
-                  </span>
+                <td
+                  className="col-8"
+                  style={
+                    data.completed
+                      ? {
+                          backgroundColor: "yellow",
+                          color: "red",
+                          textDecoration: "line-through",
+                        }
+                      : { backgroundColor: "" }
+                  }
+                >
+                  {data.todo}
                 </td>
                 <td className="d-flex justify-content-end">
                   <Button variant="success" onClick={() => markAsDone(index)}>
